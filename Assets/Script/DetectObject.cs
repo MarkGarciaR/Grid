@@ -7,10 +7,6 @@ public class DetectObject : MonoBehaviour {
     public float XPosition, ZPosition;
     float Size;
 
-    Transform dir;
-
-    bool IsActive = false;
-
     Vector3 TilePosition,CellPosition;
 
     public Grid grid;
@@ -33,31 +29,38 @@ public class DetectObject : MonoBehaviour {
                    
                     XPosition = hit.transform.position.x;
                     ZPosition = hit.transform.position.z;
-                    IsActive = true;
+
+                    /**
+                     * TilePosition è un oggetto di tipo Vector3 al quale vado a inserire i parametri di posizione dell'Object Colpito
+                     */
 
                     TilePosition = new Vector3(XPosition, hit.transform.position.y, ZPosition);
 
+                    /**
+                     * Il For mi permette di controllare ogni cella all'interno della lista e verificare che la WorldPosition della cella[x,z]
+                     * sia uguale al Vector3 [TilePosition]
+                     * 
+                     * Se questa condizione si dovesse risultare vera allora vado a salvare le variabili _x _z per capire quale cella della lista io abbia selezionato
+                     */
                     for (int x=0; x<=10; x++) {
                         for (int z=0; z<=4; z++) {
                             CellPosition = grid.GetWorldPosition(x,z);
                             if (CellPosition == TilePosition) {
                                 _z = z;
                                 _x = x;
-                                /*Debug.Log("Torvato " + _x + " - " + _z);
-                                Debug.Log("Pos " + XPosition + " - " + ZPosition);*/
                                 break;
                             }
                                 
                         }
                     }
-
-                    //dir.position = new Vector3(XPosition + Size/2, hit.transform.position.y + gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, ZPosition - Size/2);
                     
                 }
             }
         }
 
 	}
+
+    //Metodi GET
 
     public float GetPositionX() {
         float _X = XPosition;
@@ -80,14 +83,4 @@ public class DetectObject : MonoBehaviour {
         return _x;
     }
 
-    public bool GetActive() {
-        return IsActive;
-    }
-
-    private void Start()
-    {
-        //Size = gameObject.GetComponent<BoxCollider>().bounds.size.x;
-        //dir = GameObject.FindGameObjectWithTag("Player").transform;
-
-    }
 }
