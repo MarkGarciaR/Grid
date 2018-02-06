@@ -31,6 +31,7 @@ public class Player : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
+        //MainMove();
         MainMove2();
         playerStatistiche.SetDistace(Name, DistanceMove);
 
@@ -38,22 +39,22 @@ public class Player : MonoBehaviour{
 
     void Move()
     {
-        if ((detectObject.GetZ() == ZPos + 1 && detectObject.GetX() == XPos))
+        if (grid.IsValidPosition(XPos, ZPos))
         {
-            if (grid.IsValidPosition(XPos, ZPos))
-            {
                 Vector3 globalPosition = grid.GetWorldPosition(XPos, ZPos);
                 globalPosition += new Vector3(0f, 0.55f, 0f); ;
                 transform.DOMove(globalPosition, 0.6f).SetEase(Ease.Linear);
-            }
-            else
-            {
+        }
+        else
+        {
                 XPos = XPos_old;
                 ZPos = ZPos_old;
-            }
         }
+
     }
 
+
+    //movimento tramite WASD
     void MainMove() {
         XPos_old = XPos;
         ZPos_old = ZPos;
@@ -80,12 +81,46 @@ public class Player : MonoBehaviour{
         }
     }
 
+
+    //Movimento tramite doppio click del mouse
     void MainMove2() {
+        //Debug.Log(detectObject.GetX() + " - " + detectObject.GetZ());
+        int ObjectX = detectObject.GetX();
+        int ObjectZ = detectObject.GetZ();
+        DistanceMove = playerStatistiche.GetDistance();
         if (Input.GetMouseButtonDown(0)) {
-            XPos_old = XPos;
-            ZPos_old = ZPos;
-            ZPos += DistanceMove;
-            Move();
-        }
+            if (ObjectX == XPos && ObjectZ - 1 == ZPos)
+            { //SU
+                XPos_old = XPos;
+                ZPos_old = ZPos;
+
+                ZPos += DistanceMove;
+                Move();
+            }
+            else if (ObjectX == XPos && ObjectZ + 1 == ZPos)
+            { //GIU
+                XPos_old = XPos;
+                ZPos_old = ZPos;
+
+                ZPos -= DistanceMove;
+                Move();
+            }
+            else if (ObjectX + 1 == XPos && ObjectZ == ZPos)
+            { //SINISTRA
+                XPos_old = XPos;
+                ZPos_old = ZPos;
+
+                XPos -= DistanceMove;
+                Move();
+            }
+            else if (ObjectX - 1 == XPos && ObjectZ == ZPos)
+            { //DESTRA
+                XPos_old = XPos;
+                ZPos_old = ZPos;
+
+                XPos += DistanceMove;
+                Move();
+            }
+        } 
     }
 }

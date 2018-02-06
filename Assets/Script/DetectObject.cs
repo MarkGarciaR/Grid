@@ -43,7 +43,8 @@ public class DetectObject : MonoBehaviour {
                             if (CellPosition == TilePosition) {
                                 _z = z;
                                 _x = x;
-                                //Debug.Log("Torvato " + _x + " - " + _z);
+                                /*Debug.Log("Torvato " + _x + " - " + _z);
+                                Debug.Log("Pos " + XPosition + " - " + ZPosition);*/
                                 break;
                             }
                                 
@@ -69,12 +70,12 @@ public class DetectObject : MonoBehaviour {
         return _Z;
     }
 
-    public float GetZ()
+    public int GetZ()
     {
         return _z;
     }
 
-    public float GetX()
+    public int GetX()
     {
         return _x;
     }

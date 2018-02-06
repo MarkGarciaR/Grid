@@ -9,7 +9,7 @@ public class Grid : MonoBehaviour {
     public float CellSize = -1;
     public int xSize;
     public int zSize;
-
+    public string NameTile;
     public int Width = 0, Height = 0;
 
     public float DistanceTile;
@@ -39,7 +39,7 @@ public class Grid : MonoBehaviour {
         {
             for (int _z = 0; _z < z; _z++)
             {
-                Cells.Add(new CellData(_x, _z, new Vector3(_x * CellSize, transform.position.y, _z * CellSize)));
+                Cells.Add(new CellData(_x, _z, new Vector3(_x * CellSize, transform.position.y, _z * CellSize), NameTile));
             }
         }
 

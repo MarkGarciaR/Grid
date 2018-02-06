@@ -9,12 +9,14 @@ public class CellData
     public int Z;
     public Vector3 WorldPosition;
     public bool IsValid = true;
+    public string NameTile;
 
-    public CellData(int _xPos, int _zPos, Vector3 _worldPosition)
+    public CellData(int _xPos, int _zPos, Vector3 _worldPosition, string tile)
     {
         X = _xPos;
         Z = _zPos;
         WorldPosition = _worldPosition;
+        NameTile = tile;
     }
 
     public void SetValidity(bool _isValid)
