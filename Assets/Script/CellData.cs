@@ -24,4 +24,14 @@ public class CellData
         IsValid = _isValid;
     }
 
+    public void SetNameTile(string name)
+    {
+        NameTile = name;
+    }
+
+    public string GetNameTile() {
+        return NameTile;
+    }
+
+
 }
